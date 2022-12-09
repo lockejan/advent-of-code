@@ -13,6 +13,7 @@
           nativeBuildInputs = [ pkgs.bashInteractive ];
           buildInputs = [
             pkgs.lua
+            pkgs.lua52Packages.busted
             # pkgs.ghc
             # pkgs.clojure
             # pkgs.python311
