@@ -38,8 +38,30 @@ describe("first puzzle", function()
 		solver = nil
 	end)
 
+	it("should return a condensed table", function()
+		local input_lines = { 2, 4, 4, 7, 6, 7 }
+		local expected = 3
+		local result = solver.count_increased_measurements(input_lines)
+		assert.are.same(expected, result)
+	end)
+
 	it("should return the number of all measurements that are higher than the previous one", function()
-		local result = solver.eval("input.txt")
+		local result = solver.day_one_a("input.txt")
 		assert.are.same(1167, result)
 	end)
+
+	it("should return a condensed table", function()
+		local input_lines = { 2, 3, 4, 5, 6, 7 }
+		local expected = { 9, 12, 15, 18 }
+		local result = solver.get_condensed_input(input_lines)
+		assert.are.same(expected, result)
+	end)
+
+	it(
+		"should return the number of all measurements that are higher than the previous one using sliding windows",
+		function()
+			local result = solver.day_one_b("input.txt")
+			assert.are.same(1130, result)
+		end
+	)
 end)
