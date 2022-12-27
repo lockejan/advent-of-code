@@ -16,6 +16,7 @@
           buildInputs = [
             pkgs-22-05.lua5_1
             pkgs.lua51Packages.busted
+            pkgs.gnumake
             # pkgs.ghc
             # pkgs.clojure
             # pkgs.python311

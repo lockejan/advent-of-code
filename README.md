@@ -7,9 +7,13 @@ To run the given code with the exact same environment on any machine, [Nix](http
 
 ## 2021
 
-Lua tests have to be executed from within the directory they are stored in.
+The following subsections are just to document language specific stuff.
+
+### Lua
+
+Tests have to be executed from the directory they are stored in.
 ```shell
 cd ./2021/lua/
 ./tests.lua
 ```
-
+or via the included Makefile &rarr; `make test`.

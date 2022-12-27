@@ -22,7 +22,7 @@ M.get_condensed_input = function(input_lines)
 	local condensed_table = {}
 
 	-- iterate throught the table
-	for index, value in pairs(input_lines) do
+	for index, _ in pairs(input_lines) do
 		if #input_lines - index > 1 then
 			condensed_table[index] = input_lines[index] + input_lines[index + 1] + input_lines[index + 2]
 		end
