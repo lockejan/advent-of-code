@@ -2,39 +2,47 @@
 
 require("busted.runner")()
 
+local resourcesPath = "../resources/"
+
 describe("utils module tests", function()
 	setup(function()
+		-- global var
 		utils = require("utils")
 	end)
 
 	teardown(function()
+		-- global var
 		utils = nil
 	end)
 
 	it("should return true if file was found", function()
-		assert.is_true(utils.file_exists("input.txt"))
+		assert.is_true(utils.file_exists(resourcesPath .. "input-1.txt"))
 	end)
 
 	it("should return false for invalid file", function()
 		assert.is_false(utils.file_exists("not-present.txt"))
 	end)
 
-	it("should return an empty table for invalid file", function()
-		assert.are.same({}, utils.lines_from("not-present.txt"))
+	it("should return an error for invalid file", function()
+		assert.has_error(function()
+			utils.lines_from("not-present.txt")
+		end)
 	end)
 
 	it("should return a table with all lines of a file", function()
-		local parsed_table = utils.lines_from("input.txt")
+		local parsed_table = utils.lines_from(resourcesPath .. "input-1.txt")
 		assert.are.same(2000, #parsed_table)
 	end)
 end)
 
 describe("first puzzle", function()
 	setup(function()
+		-- global var
 		solver = require("day_one")
 	end)
 
 	teardown(function()
+		-- global var
 		solver = nil
 	end)
 
@@ -46,7 +54,7 @@ describe("first puzzle", function()
 	end)
 
 	it("should return the number of all measurements that are higher than the previous one", function()
-		local result = solver.day_one_a("input.txt")
+		local result = solver.day_one_a(resourcesPath .. "input-1.txt")
 		assert.are.same(1167, result)
 	end)
 
@@ -60,7 +68,7 @@ describe("first puzzle", function()
 	it(
 		"should return the number of all measurements that are higher than the previous one using sliding windows",
 		function()
-			local result = solver.day_one_b("input.txt")
+			local result = solver.day_one_b(resourcesPath .. "input-1.txt")
 			assert.are.same(1130, result)
 		end
 	)

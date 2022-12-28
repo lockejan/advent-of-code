@@ -22,8 +22,7 @@ function M.lines_from(file)
 		end
 		return lines
 	else
-		-- print("File not found or empty!")
-		return {}
+		error("File " .. file .. " not found!")
 	end
 end
 
