@@ -27,7 +27,12 @@ def test_digits_are_converted_into_a_two_digit_number(list_of_chars: list[str],
 
 
 def test_list_of_calibration_values_is_computed():
-    input = ['1adf1', '2sdffsg3', '5sdfg3', 'asdf42', '00adfg']
+    input = [
+        '1abc2',
+        'pqr3stu8vwx',
+        'a1b2c3d4e5f',
+        'treb7uchet',
+    ]
     calibrator = Calibrator(input)
     result = calibrator.compute_calibration()
     assert result == 129
