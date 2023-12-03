@@ -1,16 +1,21 @@
 #!/usr/bin/env python
 
-from functools import reduce
-
 
 class Calibrator:
 
-    def __init__(self, coordinates: list = list()) -> None:
-        self.coordinates = coordinates
+    def __init__(self, calibration_data: list = None) -> None:
+        if calibration_data is None:
+            self.calibration_data = list()
+        else:
+            self.calibration_data = calibration_data
 
-    def _get_lines_from_file(self, filename: str) -> list:
-        file = open(filename, 'r')
-        return file.readlines()
+    @classmethod
+    def with_file_input(cls, filename: str) -> 'Calibrator':
+        if filename is None:
+            return cls()
+        with open(filename, 'r') as file:
+            file_content = file.readlines()
+        return cls(file_content)
 
     def _collect_digits(self, line: str) -> list:
         return [i for i in line.rstrip('\n') if i.isdigit()]
@@ -23,21 +28,16 @@ class Calibrator:
             result = ''.join(digits * 2)
         return int(result)
 
-    def _reducer(self) -> int:
-        return reduce(lambda a, b: a + b, self.coordinates)
-
-    def _prepare_coordinates(self, line: str) -> None:
+    def _uniform_values(self, line: str) -> int:
         digits = self._collect_digits(line)
-        result = self._transform_to_int(digits)
-        self.coordinates.append(result)
+        return self._transform_to_int(digits)
 
-    def compute_calibration(self, filename: str) -> int:
-        for line in self._get_lines_from_file(filename):
-            self._prepare_coordinates(line)
-        return self._reducer()
+    def compute_calibration(self) -> int:
+        result = list(map(self._uniform_values, self.calibration_data))
+        return sum(result)
 
 
 if __name__ == '__main__':
-    calibrator = Calibrator()
-    result = calibrator.compute_calibration("../resources/input-1.txt")
-    print(f"day_01-a: {result}")
+    calibrator = Calibrator.with_file_input("../resources/input-1.txt")
+    result_a = calibrator.compute_calibration()
+    print(f"day_01-a: {result_a}")
