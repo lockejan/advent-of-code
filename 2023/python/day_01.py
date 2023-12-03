@@ -10,7 +10,7 @@ class Calibrator:
             self.calibration_data = calibration_data
 
     @classmethod
-    def with_file_input(cls, filename: str) -> 'Calibrator':
+    def with_file_input(cls, filename: str = None) -> 'Calibrator':
         if filename is None:
             return cls()
         with open(filename, 'r') as file:
