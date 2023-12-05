@@ -35,4 +35,33 @@ def test_list_of_calibration_values_is_computed():
     ]
     calibrator = Calibrator(input)
     result = calibrator.compute_calibration()
-    assert result == 129
+    assert result == 142
+
+
+@pytest.mark.parametrize("char_seq, expected_number", [
+    ("Boneoneb", 11),
+    ("asdthreeksgfnine", 39),
+    ("ninesixthree8six8", 98),
+    ("eightwothree", 83),
+])
+def test_written_number_is_transformed_into_a_number(char_seq: str,
+                                                     expected_number: int):
+    calibrator = Calibrator()
+    result = calibrator._uniform_values_advanced(char_seq)
+    assert result == expected_number
+
+
+def test_list_of_calibration_advanced_values_is_computed():
+    input = [
+        'eighthree',
+        'two1nine',
+        'eightwothree',
+        'abcone2threexyz',
+        'xtwone3four',
+        '4nineeightseven2',
+        'zoneight234',
+        '7pqrstsixteen',
+    ]
+    calibrator = Calibrator(input)
+    result = calibrator.compute_calibration_advanced()
+    assert result == (281 + 83)
