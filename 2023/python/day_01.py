@@ -34,12 +34,10 @@ class Calibrator:
         return [i for i in line.rstrip('\n') if i.isdigit()]
 
     def _transform_to_int(self, digits: list[str]) -> int:
-        result = 0
         if len(digits) >= 2:
-            result = ''.join(digits[::len(digits) - 1])
-        if len(digits) < 2:
-            result = ''.join(digits * 2)
-        return int(result)
+            return int(''.join(digits[::len(digits) - 1]))
+
+        return int(''.join(digits * 2))
 
     def _uniform_values(self, line: str) -> int:
         digits = self._collect_digits(line)
@@ -48,7 +46,7 @@ class Calibrator:
     def _text_to_numbers(self, text: str) -> str:
         pattern = re.compile(
             r'(?=(one|two|three|four|five|six|seven|eight|nine))')
-        replacement = lambda match: str(Calibrator.numbers.get(match.group(1)))
+        replacement = lambda match: str(self.numbers.get(match.group(1)))
         return re.sub(pattern, replacement, text)
 
     def _uniform_values_advanced(self, line: str) -> int:
@@ -56,18 +54,14 @@ class Calibrator:
         return self._uniform_values(transformed_line)
 
     def compute_calibration(self) -> int:
-        result = list(map(self._uniform_values, self.calibration_data))
-        return sum(result)
+        return sum(list(map(self._uniform_values, self.calibration_data)))
 
     def compute_calibration_advanced(self) -> int:
-        result = list(map(self._uniform_values_advanced,
-                          self.calibration_data))
-        return sum(result)
+        return sum(
+            list(map(self._uniform_values_advanced, self.calibration_data)))
 
 
 if __name__ == '__main__':
     calibrator = Calibrator.with_file_input("../resources/input-1.txt")
-    result_a = calibrator.compute_calibration()
-    print(f"day_01-a: {result_a}")
-    result_b = calibrator.compute_calibration_advanced()
-    print(f"day_01-b: {result_b}")
+    print(f"day_01-a: {calibrator.compute_calibration()}")
+    print(f"day_01-b: {calibrator.compute_calibration_advanced()}")
