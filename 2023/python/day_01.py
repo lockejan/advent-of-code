@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 
 import re
+from input_handler import InputHandler
 
 
-class Calibrator:
+class Calibrator(InputHandler):
     numbers: dict[str, int] = {
         "one": 1,
         "two": 2,
@@ -15,20 +16,6 @@ class Calibrator:
         "eight": 8,
         "nine": 9
     }
-
-    def __init__(self, calibration_data: list = None) -> None:
-        if calibration_data is None:
-            self.calibration_data = list()
-        else:
-            self.calibration_data = calibration_data
-
-    @classmethod
-    def with_file_input(cls, filename: str = None) -> 'Calibrator':
-        if filename is None:
-            return cls()
-        with open(filename, 'r') as file:
-            file_content = file.readlines()
-        return cls(file_content)
 
     def _collect_digits(self, line: str) -> list:
         return [i for i in line.rstrip('\n') if i.isdigit()]
@@ -54,11 +41,10 @@ class Calibrator:
         return self._uniform_values(transformed_line)
 
     def compute_calibration(self) -> int:
-        return sum(list(map(self._uniform_values, self.calibration_data)))
+        return sum(list(map(self._uniform_values, self.data)))
 
     def compute_calibration_advanced(self) -> int:
-        return sum(
-            list(map(self._uniform_values_advanced, self.calibration_data)))
+        return sum(list(map(self._uniform_values_advanced, self.data)))
 
 
 if __name__ == '__main__':

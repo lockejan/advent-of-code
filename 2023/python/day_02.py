@@ -1,24 +1,12 @@
 #!/usr/bin/env python
 
+from input_handler import InputHandler
 
-class Guesser:
+
+class Guesser(InputHandler):
     blue_max = 14
     green_max = 13
     red_max = 12
-
-    def __init__(self, data: list = None) -> None:
-        if data is None:
-            self.data = list()
-        else:
-            self.data = data
-
-    @classmethod
-    def with_file_input(cls, filename: str = None) -> 'Guesser':
-        if filename is None:
-            return cls()
-        with open(filename, 'r') as file:
-            file_content = file.readlines()
-        return cls(file_content)
 
     def is_possible_game(self, game: dict[int, dict[str, int]]) -> bool:
         game_id = list(game.keys())[0]
