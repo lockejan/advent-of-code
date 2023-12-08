@@ -55,7 +55,18 @@ class Guesser(InputHandler):
         ]
         return sum(map(int, games))
 
+    def probe_advanced(self):
+        parsed_data = [self.parse_game(game) for game in self.data]
+        power = lambda x: x.get("blue", 0) * x.get("green", 0) * x.get(
+            "red", 0)
+        power_of_games = [
+            power(game.get(list(game.keys())[0], dict()))
+            for game in parsed_data
+        ]
+        return sum(power_of_games)
+
 
 if __name__ == '__main__':
     guesser = Guesser.with_file_input("../resources/input-2.txt")
     print(f"day_02-a: {guesser.probe()}")
+    print(f"day_02-b: {guesser.probe_advanced()}")
