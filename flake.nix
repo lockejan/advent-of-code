@@ -23,6 +23,9 @@
             pkgs.python311Packages.pytest
             # pkgs.rustc
           ];
+          shellHook = ''
+            export PYTHONPATH="./2023/python:$PYTHONPATH"
+          '';
         };
       });
 }

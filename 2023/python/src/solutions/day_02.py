@@ -1,14 +1,12 @@
-#!/usr/bin/env python
-
-from input_handler import InputHandler
+from src.utils.input_handler import InputHandler
 
 
-class Guesser(InputHandler):
+class Solution(InputHandler):
     blue_max = 14
     green_max = 13
     red_max = 12
 
-    def is_possible_game(self, game: dict[int, dict[str, int]]) -> bool:
+    def _is_possible_game(self, game: dict[int, dict[str, int]]) -> bool:
         game_id = list(game.keys())[0]
         samples = game.get(game_id, dict())
         if samples.get("blue", 0) > self.blue_max:
@@ -19,7 +17,7 @@ class Guesser(InputHandler):
             return False
         return True
 
-    def count_should_update(self, color, count, round) -> bool:
+    def _count_should_update(self, color, count, round) -> bool:
         if color == "blue":
             return count > round.get("blue", 0)
         elif color == "green":
@@ -28,35 +26,36 @@ class Guesser(InputHandler):
             return count > round.get("red", 0)
         return False
 
-    def parse_game(self, game: str) -> dict[int, dict[str, int]]:
-        game = game.replace("Game ", "")
-        game_id, game_stats = game.split(":")
-        game_id = int(game_id)
+    def _parse_stats(self, game_stats) -> dict[str, int]:
         game_parts = game_stats.replace(";", ",").split(",")
         game_parts = [part.strip().split(' ') for part in game_parts]
-
         game_seq = list()
         for sample in game_parts:
             game_seq.extend(reversed(sample))
-
         color, count = game_seq[0::2], list(map(int, game_seq[1::2]))
         rounds = dict()
         for color, count in zip(color, count):
-            if self.count_should_update(color, count, rounds):
+            if self._count_should_update(color, count, rounds):
                 rounds[color] = count
+        return rounds
+
+    def _parse(self, game: str) -> dict[int, dict[str, int]]:
+        game = game.replace("Game ", "")
+        game_id, game_stats = game.split(":")
+        rounds = self._parse_stats(game_stats)
 
         return {game_id: rounds}
 
-    def probe(self):
-        parsed_data = [self.parse_game(game) for game in self.data]
+    def part1(self):
+        parsed_data = [self._parse(game) for game in self.data]
         games = [
             list(game.keys())[0] for game in parsed_data
-            if self.is_possible_game(game)
+            if self._is_possible_game(game)
         ]
         return sum(map(int, games))
 
-    def probe_advanced(self):
-        parsed_data = [self.parse_game(game) for game in self.data]
+    def part2(self):
+        parsed_data = [self._parse(game) for game in self.data]
         power = lambda x: x.get("blue", 0) * x.get("green", 0) * x.get(
             "red", 0)
         power_of_games = [
@@ -64,9 +63,3 @@ class Guesser(InputHandler):
             for game in parsed_data
         ]
         return sum(power_of_games)
-
-
-if __name__ == '__main__':
-    guesser = Guesser.with_file_input("../resources/input-2.txt")
-    print(f"day_02-a: {guesser.probe()}")
-    print(f"day_02-b: {guesser.probe_advanced()}")

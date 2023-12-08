@@ -1,10 +1,9 @@
-#!/usr/bin/env python
-
 import re
-from input_handler import InputHandler
+
+from src.utils.input_handler import InputHandler
 
 
-class Calibrator(InputHandler):
+class Solution(InputHandler):
     numbers: dict[str, int] = {
         "one": 1,
         "two": 2,
@@ -40,14 +39,8 @@ class Calibrator(InputHandler):
         transformed_line = self._text_to_numbers(line)
         return self._uniform_values(transformed_line)
 
-    def compute_calibration(self) -> int:
+    def part1(self) -> int:
         return sum(list(map(self._uniform_values, self.data)))
 
-    def compute_calibration_advanced(self) -> int:
+    def part2(self) -> int:
         return sum(list(map(self._uniform_values_advanced, self.data)))
-
-
-if __name__ == '__main__':
-    calibrator = Calibrator.with_file_input("../resources/input-1.txt")
-    print(f"day_01-a: {calibrator.compute_calibration()}")
-    print(f"day_01-b: {calibrator.compute_calibration_advanced()}")
