@@ -19,7 +19,11 @@ class SolutionBase(InputHandler):
         return result
 
     def benchmark(self, _print=False) -> None:
-        if _print and len(self.benchmark_times) > 0 and len(self.benchmark_times) % 2 == 0:
+        if (
+            _print
+            and len(self.benchmark_times) > 0
+            and len(self.benchmark_times) % 2 == 0
+        ):
             t = self.benchmark_times[-1] - self.benchmark_times[-2]
             units = ["s", "ms", "µs", "ns"]
             unit_idx = 0

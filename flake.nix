@@ -21,6 +21,7 @@
             # pkgs.clojure
             pkgs.python311
             pkgs.python311Packages.pytest
+            pkgs.black
             # pkgs.rustc
           ];
           shellHook = ''

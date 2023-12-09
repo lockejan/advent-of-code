@@ -4,7 +4,6 @@ from src.solutions.day_02 import Solution
 
 
 class TestClass:
-
     @pytest.fixture
     def game_data(self):
         return [
@@ -15,12 +14,12 @@ class TestClass:
             "Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green\n",
             "Game 6: 6 red, 1 blue, 14 green; 2 blue, 1 red, 2 green\n",
             "Game 7: 6 red, 1 blue, 23 green; 15 blue, 1 red, 2 green\n",
-            "Game 8: 6 red, 1 blue, 23 green; 2 blue, 13 red, 2 green\n"
+            "Game 8: 6 red, 1 blue, 23 green; 2 blue, 13 red, 2 green\n",
         ]
 
     def test_game_can_be_parsed(self, game_data):
         # GIVEN
-        expected = {'1': {"blue": 6, "red": 4, "green": 2}}
+        expected = {"1": {"blue": 6, "red": 4, "green": 2}}
         solution = Solution()
         # WHEN
         actual = solution._parse(game_data[0])
@@ -42,7 +41,7 @@ class TestClass:
             "Game 2: 1 blue, 2 green; 3 green, 4 blue, 1 red; 1 green, 1 blue\n",
             "Game 3: 8 green, 6 blue, 20 red; 5 blue, 4 red, 13 green; 5 green, 1 red\n",
             "Game 4: 1 green, 3 red, 6 blue; 3 green, 6 red; 3 green, 15 blue, 14 red\n",
-            "Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green\n"
+            "Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green\n",
         ]
         solution = Solution(data=input_data)
         # WHEN

@@ -28,7 +28,7 @@ class Solution(SolutionBase):
 
     def _parse_stats(self, game_stats) -> dict[str, int]:
         game_parts = game_stats.replace(";", ",").split(",")
-        game_parts = [part.strip().split(' ') for part in game_parts]
+        game_parts = [part.strip().split(" ") for part in game_parts]
         game_seq = list()
         for sample in game_parts:
             game_seq.extend(reversed(sample))
@@ -49,17 +49,14 @@ class Solution(SolutionBase):
     def part1(self) -> int:
         parsed_data = [self._parse(game) for game in self.data]
         games = [
-            list(game.keys())[0] for game in parsed_data
-            if self._is_possible_game(game)
+            list(game.keys())[0] for game in parsed_data if self._is_possible_game(game)
         ]
         return sum(map(int, games))
 
     def part2(self) -> int:
         parsed_data = [self._parse(game) for game in self.data]
-        power = lambda x: x.get("blue", 0) * x.get("green", 0) * x.get(
-            "red", 0)
+        power = lambda x: x.get("blue", 0) * x.get("green", 0) * x.get("red", 0)
         power_of_games = [
-            power(game.get(list(game.keys())[0], dict()))
-            for game in parsed_data
+            power(game.get(list(game.keys())[0], dict())) for game in parsed_data
         ]
         return sum(power_of_games)
