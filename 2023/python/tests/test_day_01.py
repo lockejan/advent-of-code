@@ -41,7 +41,7 @@ class TestClass:
             'treb7uchet',
         ]
         # GIVEN
-        solution = Solution(input)
+        solution = Solution(data=input)
         # WHEN
         result = solution.part1()
         # THEN
@@ -77,7 +77,7 @@ class TestClass:
 
     def test_list_of_advanced_calibration_values_is_computed(self, input_example):
         # GIVEN
-        solution = Solution(input_example)
+        solution = Solution(data=input_example)
         # WHEN
         result = solution.part2()
         # THEN

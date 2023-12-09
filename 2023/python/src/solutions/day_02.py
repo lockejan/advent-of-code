@@ -1,7 +1,7 @@
-from src.utils.input_handler import InputHandler
+from src.utils.solution_base import SolutionBase
 
 
-class Solution(InputHandler):
+class Solution(SolutionBase):
     blue_max = 14
     green_max = 13
     red_max = 12
@@ -46,7 +46,7 @@ class Solution(InputHandler):
 
         return {game_id: rounds}
 
-    def part1(self):
+    def part1(self) -> int:
         parsed_data = [self._parse(game) for game in self.data]
         games = [
             list(game.keys())[0] for game in parsed_data
@@ -54,7 +54,7 @@ class Solution(InputHandler):
         ]
         return sum(map(int, games))
 
-    def part2(self):
+    def part2(self) -> int:
         parsed_data = [self._parse(game) for game in self.data]
         power = lambda x: x.get("blue", 0) * x.get("green", 0) * x.get(
             "red", 0)

@@ -1,9 +1,9 @@
 import re
 
-from src.utils.input_handler import InputHandler
+from src.utils.solution_base import SolutionBase
 
 
-class Solution(InputHandler):
+class Solution(SolutionBase):
     numbers: dict[str, int] = {
         "one": 1,
         "two": 2,
