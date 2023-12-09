@@ -41,14 +41,14 @@ class TestClass:
         assert result is expected_number
 
     def test_list_of_calibration_values_is_computed(self):
-        input = [
+        input_data = [
             "1abc2",
             "pqr3stu8vwx",
             "a1b2c3d4e5f",
             "treb7uchet",
         ]
         # GIVEN
-        solution = Solution(data=input)
+        solution = Solution(data=input_data)
         # WHEN
         result = solution.part1()
         # THEN
