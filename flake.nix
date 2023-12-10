@@ -22,10 +22,14 @@
             pkgs.python311
             pkgs.python311Packages.pytest
             pkgs.black
+            pkgs.pre-commit
             # pkgs.rustc
           ];
           shellHook = ''
             export PYTHONPATH="./2023/python:$PYTHONPATH"
+            if [ ! -f .git/hooks/pre-commit ]; then
+              pre-commit install
+            fi
           '';
         };
       });
