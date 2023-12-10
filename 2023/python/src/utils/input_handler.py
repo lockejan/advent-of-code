@@ -1,3 +1,6 @@
+import os
+
+
 class InputHandler:
     def __init__(self, data: list = None) -> None:
         if data is None:
@@ -15,5 +18,6 @@ class InputHandler:
 
     @staticmethod
     def build_filepath_for_day(day_num: int) -> str:
+        utils_dir = os.path.dirname(os.path.abspath(__file__))
         day_num = f"0{day_num}" if day_num < 10 else day_num
-        return f"../resources/input-{day_num}.txt"
+        return f"{utils_dir}/../../../resources/input-{day_num}.txt"

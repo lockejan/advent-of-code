@@ -41,7 +41,7 @@ def main():
             args.day, args.benchmark
         )
         print(
-            f"the answer is {answer}\n"
+            f"the answer is {answer}"
             if (answer := solution.solve(part_num=args.part)) is not None
             else ""
         )
