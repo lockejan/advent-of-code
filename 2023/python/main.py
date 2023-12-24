@@ -24,7 +24,11 @@ def main():
         help="Required, part number of the day of the AoC event",
     )
     parser.add_argument(
-        "-b", "--benchmark", action="store_true", help="Optional, benchmarking the code"
+        "-b",
+        "--benchmark",
+        dest="benchmark",
+        action="store_true",
+        help="Optional, benchmarking the code",
     )
     args = parser.parse_args()
 
