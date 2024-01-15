@@ -1,17 +1,13 @@
 #! /usr/bin/env lua
 
-require("busted.runner")()
-
-local resourcesPath = "../resources/"
+local resourcesPath = "./resources/"
 
 describe("utils module tests", function()
 	setup(function()
-		-- global var
 		utils = require("utils")
 	end)
 
 	teardown(function()
-		-- global var
 		utils = nil
 	end)
 
@@ -37,12 +33,10 @@ end)
 
 describe("first puzzle", function()
 	setup(function()
-		-- global var
-		solver = require("day_one")
+		solver = require("day_01")
 	end)
 
 	teardown(function()
-		-- global var
 		solver = nil
 	end)
 
@@ -54,7 +48,7 @@ describe("first puzzle", function()
 	end)
 
 	it("should return the number of all measurements that are higher than the previous one", function()
-		local result = solver.day_one_a(resourcesPath .. "input-1.txt")
+		local result = solver.part_1(resourcesPath .. "input-1.txt")
 		assert.are.same(1167, result)
 	end)
 
@@ -68,7 +62,7 @@ describe("first puzzle", function()
 	it(
 		"should return the number of all measurements that are higher than the previous one using sliding windows",
 		function()
-			local result = solver.day_one_b(resourcesPath .. "input-1.txt")
+			local result = solver.part_2(resourcesPath .. "input-1.txt")
 			assert.are.same(1130, result)
 		end
 	)

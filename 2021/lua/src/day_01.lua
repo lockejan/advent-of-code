@@ -2,6 +2,8 @@
 
 M = {}
 
+local utils = require("utils")
+
 M.count_increased_measurements = function(input_lines)
 	local previous_value = 0
 	local counter = -1
@@ -32,16 +34,14 @@ M.get_condensed_input = function(input_lines)
 	return condensed_table
 end
 
-M.day_one_a = function(file)
-	local utils = require("utils")
+M.part_1 = function(file)
 	local input_lines = utils.lines_from(file)
 	local sum = M.count_increased_measurements(input_lines)
 
 	return sum
 end
 
-M.day_one_b = function(file)
-	local utils = require("utils")
+M.part_2 = function(file)
 	local input_lines = utils.lines_from(file)
 	local condensed_table = M.get_condensed_input(input_lines)
 	local sum = M.count_increased_measurements(condensed_table)

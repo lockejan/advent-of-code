@@ -6,8 +6,7 @@ BENCHMARK=
 
 2021-test:
 	@echo "Running lua tests"
-	cd ./2021/lua/; \
-		lua tests.lua
+	busted -C=./2021/lua
 
 2021:
 
