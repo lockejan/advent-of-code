@@ -7,11 +7,11 @@ To run the given code with the exact same environment on any machine, [Nix](http
 
 ## Progress
 
-| Day |  2021 | 2023 |
-| --- |  ---- | ---- |
-| 1   |   ✔︎   |      |
-| 2   |       |      |
+| Day | 2021                             | 2023                                        |
+| --- | -------------------------------- | ------------------------------------------- |
+| 1   | [✔︎](./2021/lua/src/day_01.lua)   | [✔︎](./2023/python/src/solutions/day_01.py)  |
+| 2   | [✔︎](./2021/lua/src/day_02.lua)   | [✔︎](./2023/python/src/solutions/day_02.py)  |
 
 ## Tests
 
-Run the whole test suite via the included Makefile &rarr; `make 2021`.
+Run the whole test suite via the included Makefile → `make 2021`.
